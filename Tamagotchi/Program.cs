@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Timers;
 using Timer = System.Timers.Timer;
+using System.Diagnostics;
 
 namespace Tamagotchi
 {
@@ -18,29 +19,33 @@ namespace Tamagotchi
 
         static void Main(string[] args)
         {
+
+            SetTimer();
             
-            DialogResult res = MessageBox.Show("Запуск таймера?",
-                                   "Тамагочи", MessageBoxButtons.YesNo,
-                                   MessageBoxIcon.Information,
-                                   MessageBoxDefaultButton.Button1, 0);
-            if(res == DialogResult.Yes)
-            {
-                SetTimer();
-                Console.ReadLine();
-                aTimer.Stop();
-                aTimer.Dispose();
-                
-            }
-            else { 
-                Console.WriteLine("Вы не запустили таймер"); 
-            }
+
+            Console.WriteLine("\t # # # # # # # # ");
+            Console.WriteLine("\t#               #");
+            Console.WriteLine("\t#   ###    ###  #");
+            Console.WriteLine("\t#  ##  #  ##  # #");
+            Console.WriteLine("\t#  ##  #  ##  # #");
+            Console.WriteLine("\t#  #   #  #   # #");
+            Console.WriteLine("\t#   ###    ###  #");
+            Console.WriteLine("\t#               #");
+            Console.WriteLine("\t#          #    #");
+            Console.WriteLine("\t#    ######     #");
+            Console.WriteLine("\t#               #");
+            Console.WriteLine("\t#               #");
+            Console.WriteLine("\t # # # # # # # # ");
+            Toy toy = new Toy();
+            
+
+
 
         }
-
         private static void SetTimer()
         {
             // Create a timer with a two second interval.
-            aTimer = new System.Timers.Timer(2000);
+            aTimer = new Timer(120000);
             // Hook up the Elapsed event for the timer. 
             aTimer.Elapsed += OnTimedEvent;
             aTimer.AutoReset = true;
@@ -48,8 +53,10 @@ namespace Tamagotchi
         }
         private static void OnTimedEvent(Object source, ElapsedEventArgs e)
         {
-            Console.WriteLine("The Elapsed event was raised at {0:HH:mm:ss.fff}",
-                              e.SignalTime);
+            aTimer.Stop();
+            aTimer.Dispose();
+            MessageBox.Show("Время вышло", "Конец игры", MessageBoxButtons.OK);
+            
         }
     }
 }
